@@ -1,0 +1,12 @@
+<litepal>
+
+    <dbname value="chengzi_weather"/>
+
+    <version value="1"/>
+<!--litepal中的实体类必须集成Datasupport-->
+    <list>
+        <mapping class="com.chengziweather.hoperun.db.Province"/>
+        <mapping class="com.chengziweather.hoperun.db.City"/>
+        <mapping class="com.chengziweather.hoperun.db.County"/>
+    </list>
+</litepal>

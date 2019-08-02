@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"><!--#3F51B5蓝色-->
+    <!--添加一个ImageView用于显示获取到的必应每日一图-->
+    <ImageView
+        android:id="@+id/bing_pic_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+    <!--加入滑动菜单功能，第一个主控件作为主屏幕显示的内容，第二个控件作为
+            滑动菜单显示的内容，因此第二个控件添加了ChooseAreaFragment-->
+  <android.support.v4.widget.DrawerLayout
+      android:id="@+id/drawer_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <!--在ScrollView外嵌套SwipeRefreshLayout,使其就自动具有下拉刷新功能了。-->
+  <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <!--在FrameLayout中嵌套ScrollView因为天气界面内容较多，使用ScrollView允许通过滚动的方式查看屏幕外的内容-->
+    <ScrollView
+        android:id="@+id/weather_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+    <!--ScrollView内部只允许存在一个直接子布局，因此又嵌套了一个垂直方向的LinearLayout并将刚才所有的布局导入其中-->
+        <!--借助android:fitsSystemWindows="true"解决没有单独为系统状态栏留出空间的问题-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+            <include layout="@layout/title"/>
+            <include layout="@layout/now"/>
+            <include layout="@layout/forecast"/>
+            <include layout="@layout/aqi"/>
+            <include layout="@layout/suggestion"/>
+        </LinearLayout>
+    </ScrollView>
+  </android.support.v4.widget.SwipeRefreshLayout>
+      <fragment
+          android:id="@+id/choose_area_fragment"
+          android:name="com.chengziweather.hoperun.view.fragment.ChooseAreaFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="start"/>
+  </android.support.v4.widget.DrawerLayout>
+</FrameLayout>
